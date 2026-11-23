@@ -1,0 +1,98 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource/ibm-plex-mono/latin-400.css";
+@import "@fontsource/ibm-plex-mono/latin-500.css";
+
+@theme {
+  --color-paper: #F5F3EE;
+  --color-paper-2: #ECE9E1;
+  --color-navy: #0B264E;
+  --color-navy-2: #14335F;
+  --color-ink-muted: #4A5A72;
+  --color-line: rgb(11 38 78 / 0.16);
+  --color-tick: #7A8799;
+  --color-signal: #FF761E;
+  --color-signal-ink: #A8400A;
+  --color-on-navy: #F5F3EE;
+  --color-on-navy-muted: #A9B4C6;
+  --color-error: #B3261E;
+  --font-sans: "Archivo Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-draw: cubic-bezier(0.65, 0, 0.35, 1);
+  --pad: clamp(20px, 1rem + 2.2vw, 96px);
+  --container: clamp(1200px, 78vw, 2200px);
+  --header-h: 64px;
+  --anchor-offset: calc(var(--header-h) + clamp(16px, 3vh, 40px));
+  --section-y: clamp(72px, 6vw + 40px, 200px);
+  --fs-body: 1rem;
+  --fs-lead: clamp(1.1875rem, 1rem + 0.55vw, 1.625rem);
+  --fs-mono: clamp(0.8125rem, 0.78rem + 0.15vw, 1rem);
+  --fs-nav: clamp(0.875rem, 0.84rem + 0.15vw, 1.0625rem);
+}
+
+html {
+  overflow-x: clip;
+  scroll-padding-top: calc(var(--header-h) + 8px);
+  background: var(--color-paper);
+  color: var(--color-navy);
+  font-family: var(--font-sans);
+  -webkit-text-size-adjust: 100%;
+}
+@media (min-width: 1024px) { :root { --header-h: 80px; } }
+@media (min-width: 481px) { :root { --fs-body: clamp(1.0625rem, 1rem + 0.2vw, 1.25rem); } }
+body { margin: 0; overflow-x: clip; min-width: 320px; line-height: 1.6; font-size: var(--fs-body); }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+:focus-visible { outline: 2px solid var(--color-navy); outline-offset: 2px; }
+.on-navy :focus-visible { outline-color: var(--color-signal); }
+
+/* type roles */
+.t-display {
+  font-size: clamp(2.5rem, 11vw, 3.5rem);
+  line-height: 0.92; font-weight: 800; text-transform: uppercase;
+  letter-spacing: -0.02em; font-stretch: 112%;
+}
+@media (min-width: 640px) { .t-display { font-size: clamp(3rem, 1.2rem + 5vw, 5rem); } }
+@media (min-width: 1024px) { .t-display { font-size: clamp(2.75rem, 3.9vw, 8.5rem); } }
+.t-h2 { font-size: clamp(2.25rem, 1.2rem + 3.4vw, 5.5rem); line-height: 1; font-weight: 700; letter-spacing: -0.015em; text-wrap: balance; }
+.t-h3 { font-size: clamp(1.375rem, 1.1rem + 1vw, 2.25rem); line-height: 1.15; font-weight: 600; }
+.t-lead { font-size: var(--fs-lead); line-height: 1.5; max-width: 52ch; }
+.t-mono {
+  font-family: var(--font-mono); font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em;
+  font-size: var(--fs-mono); line-height: 1.45;
+}
+.wrap { padding-inline: var(--pad); max-width: var(--container); margin-inline: auto; width: 100%; }
+.grid12 { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: clamp(16px, 2vw, 32px); }
+.pad-y { padding-block: var(--section-y); }
+
+/* underline-draw link */
+.link {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size 300ms var(--ease-out); padding-bottom: 2px;
+}
+.link:hover, .link:focus-visible { background-size: 100% 1px; }
+.link-on { background-size: 100% 1px; }
+.link-on:hover { background-size: 0 1px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 56px; padding: 0 28px;
+  background: var(--color-navy); color: var(--color-paper); border-radius: 2px; font-weight: 700; font-size: var(--fs-body);
+  transition: background-color 160ms var(--ease-out), transform 160ms var(--ease-out);
+}
+.btn:hover { background: var(--color-signal); color: var(--color-navy); }
+.on-navy .btn { background: var(--color-signal); color: var(--color-navy); }
+.on-navy .btn:hover { background: #FF8F47; }
+.btn:active { transform: scale(0.98); }
+.btn:disabled { opacity: 0.7; cursor: progress; }
+.btn .arr { transition: transform 160ms var(--ease-out); }
+.btn:hover .arr { transform: translateX(4px); }
+
+.sr-only-live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@keyframes hint { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+.hint-line { animation: hint 2.6s var(--ease-draw) infinite; }
+@media (prefers-reduced-motion: reduce) { .hint-line { animation: none; } }
