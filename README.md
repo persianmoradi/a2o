@@ -40,3 +40,6 @@ URL-flag: `?webgl=off` (SVG-fallback), `?debug`. Tidslinjen (vinduer i p) ligger
 - `public/photos/svc-banearbejdere-*`: stock. Replace with a real A2O track photo.
 - Brolæggere, Tømrere and Maskinførere photos: branded but possibly AI-edited. Confirm the client owns them.
 - Originals are in `photo-sources/` (not shipped).
+
+## Projekter (kundefeedback runde 1)
+Karrusellen og sagssiderne i `src/content.ts` (`projects`) er pladsholdere: type, sted, år, leverancer og tekster skal erstattes, når A2O har leveret og godkendt indholdet. Alle sager er markeret med en "Pladsholder"-chip. Sagssider ligger på `/projekter/<slug>`; `vercel.json` sender dem til `index.html`.

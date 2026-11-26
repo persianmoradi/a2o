@@ -88,3 +88,10 @@ export function Label({ children, dark = false }: { children: ReactNode; dark?: 
   )
 }
 
+
+/** Marks content that is a stand-in until the client supplies the real thing. */
+export function Ph({ children = 'Pladsholder', dark = false }: { children?: ReactNode; dark?: boolean }) {
+  return (
+    <span className={`t-mono inline-flex items-center border border-dashed px-2 py-0.5 ${dark ? 'border-on-navy-muted text-on-navy-muted' : 'border-signal-ink text-signal-ink'}`}>{children}</span>
+  )
+}

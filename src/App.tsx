@@ -3,6 +3,7 @@ import { MotionConfig } from 'motion/react'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { About, Crew, Services } from './components/Story'
+import { Projects } from './components/Projects'
 import { Team } from './components/Team'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
@@ -48,6 +49,7 @@ export default function App() {
         <About />
         <Services />
         <Crew />
+        <Projects />
         <Team />
         <Contact />
       </main>

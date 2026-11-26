@@ -1,9 +1,13 @@
 import { useEffect, useRef, useState } from 'react'
 import { company, nav as links } from '../content'
 import { startScroll, stopScroll } from '../lib/scroll'
+import { onLinkClick } from '../lib/router'
 import { Logo } from './ui'
 
-export function Header() {
+export function Header({ home = true }: { home?: boolean }) {
+  // off the homepage the section links point back to / and are routed client-side
+  const to = (h: string) => (home ? h : `/${h}`)
+  const click = (h: string) => (e: React.MouseEvent<HTMLAnchorElement>) => { if (!home) onLinkClick(e, to(h)) }
   const [open, setOpen] = useState(false)
   const btn = useRef<HTMLButtonElement>(null)
   const nav = useRef<HTMLElement>(null)
@@ -26,9 +30,9 @@ export function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-40 isolate h-[var(--header-h)] border-b border-line bg-paper">
       <div className="wrap flex h-full items-center justify-between">
-        <a href="#top" className="block h-full" aria-label="A2O Anlæg og Entreprise, til toppen"><Logo size="header" /></a>
+        <a href={home ? '#top' : '/'} onClick={(e) => { if (!home) { onLinkClick(e, '/') } }} className="block h-full" aria-label="A2O Anlæg og Entreprise, til toppen"><Logo size="header" /></a>
         <nav aria-label="Hovedmenu" className="hidden items-center gap-8 lg:flex xl:gap-12">
-          {links.map(({ label: l, href: h }) => <a key={h} href={h} className="link inline-flex min-h-11 min-w-11 items-center justify-center font-mono text-[length:var(--fs-nav)] font-medium tracking-[0.12em] text-navy uppercase">{l}</a>)}
+          {links.map(({ label: l, href: h }) => <a key={h} href={to(h)} onClick={click(h)} className="link inline-flex min-h-11 min-w-11 items-center justify-center font-mono text-[length:var(--fs-nav)] font-medium tracking-[0.12em] text-navy uppercase">{l}</a>)}
         </nav>
         <a href={company.tel} className="t-mono link hidden min-h-11 items-center text-navy lg:inline-flex" aria-label={`Ring til ${company.phone}`}>{company.phone}</a>
         <div className="-mr-2 flex items-center lg:hidden">
@@ -40,7 +44,7 @@ export function Header() {
         <nav ref={nav} id="mobile-nav" aria-label="Mobilmenu" className="absolute inset-x-0 top-full border-b border-line bg-paper shadow-[0_12px_24px_-12px_rgb(11_38_78/0.25)]">
           <ul className="wrap py-2">
             {links.map(({ label: l, href: h }) => (
-              <li key={h}><a href={h} onClick={() => { close(true); startScroll() }} className="flex min-h-12 items-center border-b border-line font-mono text-[1rem] font-medium tracking-[0.12em] text-navy uppercase last:border-b-0">{l}</a></li>
+              <li key={h}><a href={to(h)} onClick={(e) => { close(true); startScroll(); click(h)(e) }} className="flex min-h-12 items-center border-b border-line font-mono text-[1rem] font-medium tracking-[0.12em] text-navy uppercase last:border-b-0">{l}</a></li>
             ))}
           </ul>
         </nav>

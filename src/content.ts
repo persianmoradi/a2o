@@ -12,6 +12,7 @@ export const nav = [
   { label: 'Om os', href: '#om' },
   { label: 'Ydelser', href: '#ydelser' },
   { label: 'Mandskab', href: '#mandskab' },
+  { label: 'Projekter', href: '#projekter' },
   { label: 'Ledelse', href: '#ledelse' },
   { label: 'Kontakt', href: '#kontakt' },
 ] as const
@@ -60,7 +61,7 @@ export const services = {
     { n: '03', t: 'Brolæggere', d: 'Brosten og kantsten lagt med præcision. Vores folk betjener også minigravere og dumpere.', img: { name: 'hero-site', w: 1402, h: 1122, widths: [640, 1200], pos: '50% 60%', alt: 'Brolægger på knæ ved nylagt belægning' } satisfies Img },
     { n: '04', t: 'Tømrere', d: 'Tagkonstruktioner, renovering og indvendigt tømrerarbejde.', img: { name: 'svc-toemrere', w: 1448, h: 1086, widths: [640, 1200], pos: '50% 50%', alt: 'Tømrere i gang med tagkonstruktion' } satisfies Img },
     { n: '05', t: 'Maskinførere', d: 'Præcis og sikker betjening af entreprenørmaskiner.', img: { name: 'home-1', w: 1402, h: 1122, widths: [640, 1200], pos: '50% 55%', alt: 'Gul dumper med fører på mudret byggeplads' } satisfies Img },
-    { n: '06', t: 'Betonarbejdere', d: 'Fra støbning af fundament til færdig råhus.', img: { name: 'svc-betonarbejdere', w: 1440, h: 1920, widths: [640, 1200], pos: '50% 42%', alt: 'Betonarbejder med vinkelsliber, gnister flyver' } satisfies Img },
+    { n: '06', t: 'Betonarbejdere', d: 'Fra støbning af fundament til færdig råhus.', img: { name: 'crew', w: 1200, h: 1600, widths: [640, 1000], pos: '50% 60%', alt: 'To arbejdere ved armeringsnet og forskalling' } satisfies Img },
   ],
 }
 
@@ -74,7 +75,7 @@ export const crew = {
     { k: 'FASTE KONTAKTER', v: 'Én ansvarlig partner gennem hele forløbet.' },
     { k: 'HELE DANMARK', v: 'Vores crews arbejder over hele landet.' },
   ],
-  a: { name: 'crew', w: 1200, h: 1600, widths: [640, 1000], pos: '50% 45%', alt: 'To arbejdere ved armeringsnet og forskalling på byggeplads' } satisfies Img,
+  a: { name: 'svc-betonarbejdere', w: 1440, h: 1920, widths: [640, 1200], pos: '50% 42%', alt: 'Betonarbejder med vinkelsliber, gnister flyver' } satisfies Img,
   b: { name: 'vision', w: 1200, h: 1600, widths: [640, 1200], pos: '50% 40%', alt: 'Arbejder bøjer armeringsjern på en træplade' } satisfies Img,
 }
 
@@ -99,4 +100,51 @@ export const contact = {
   lead: 'Fortæl os kort om projektet, så vender vi tilbage hurtigst muligt.',
   thanks: 'Tak. Vi har modtaget din besked.',
   thanksSub: 'Vi vender tilbage hurtigst muligt.',
+}
+
+export type Case = {
+  slug: string; type: string; partner: string; place?: string; year?: string; teaser: string; intro: string; scope: string[]
+  img: Img; gallery?: Img[]; placeholder?: boolean
+}
+
+const PH_INTRO = 'Pladsholdertekst: her beskriver vi opgaven, forløbet og resultatet, så snart A2O har leveret projektets detaljer og godkendt teksten.'
+const PH_SCOPE = ['[Leverance 1]', '[Leverance 2]', '[Leverance 3]']
+
+export const projects = {
+  eyebrow: 'Udvalgte projekter',
+  title: 'Udvalgte projekter',
+  lead: 'Et udpluk af opgaver, vi har løst sammen med vores samarbejdspartnere. Træk i kortene, eller brug pilene.',
+  cta: 'Se projektet',
+  items: [
+    {
+      slug: 'akf-ejendomme', type: '[Type opgave]', partner: 'AKF Ejendomme A/S', place: '[Sted]', year: '[År]',
+      teaser: 'Afstivet udgravning med gravemaskine og mandskab fra A2O. Detaljer følger.',
+      intro: PH_INTRO, scope: PH_SCOPE, placeholder: true,
+      img: { name: 'om-1', w: 1440, h: 1920, widths: [640, 1000], pos: '50% 45%', alt: 'Afstivet udgravning med gravemaskine og arbejdere, projekt for AKF Ejendomme A/S' },
+    },
+    {
+      slug: 'gvl-entreprise', type: '[Type opgave]', partner: 'G.V.L Entreprise A/S', place: '[Sted]', year: '[År]',
+      teaser: 'Arbejdere ved en åben udgravning. Detaljer følger.',
+      intro: PH_INTRO, scope: PH_SCOPE, placeholder: true,
+      img: { name: 'om-project', w: 1440, h: 1920, widths: [640, 1000], pos: '50% 55%', alt: 'Arbejdere ved en åben udgravning, projekt for G.V.L Entreprise A/S' },
+    },
+    {
+      slug: 'fjernvarme', type: 'Fjernvarme', partner: '[Samarbejdspartner]', place: '[Sted]', year: '[År]',
+      teaser: 'Pladsholder: kort beskrivelse af et fjernvarmeprojekt.',
+      intro: PH_INTRO, scope: PH_SCOPE, placeholder: true,
+      img: { name: 'home-1', w: 1402, h: 1122, widths: [640, 1200], pos: '50% 55%', alt: 'Gul dumper med fører på mudret byggeplads' },
+    },
+    {
+      slug: 'belaegning', type: 'Belægning', partner: '[Samarbejdspartner]', place: '[Sted]', year: '[År]',
+      teaser: 'Pladsholder: kort beskrivelse af et belægningsprojekt.',
+      intro: PH_INTRO, scope: PH_SCOPE, placeholder: true,
+      img: { name: 'hero-site', w: 1402, h: 1122, widths: [640, 1200], pos: '50% 60%', alt: 'Brolægger på knæ ved nylagt belægning' },
+    },
+    {
+      slug: 'raahus-beton', type: 'Råhus & beton', partner: '[Samarbejdspartner]', place: '[Sted]', year: '[År]',
+      teaser: 'Pladsholder: kort beskrivelse af et råhus- og betonprojekt.',
+      intro: PH_INTRO, scope: PH_SCOPE, placeholder: true,
+      img: { name: 'vision', w: 1200, h: 1600, widths: [640, 1200], pos: '50% 40%', alt: 'Arbejder bøjer armeringsjern på en træplade' },
+    },
+  ] as Case[],
 }

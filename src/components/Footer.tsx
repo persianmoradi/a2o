@@ -1,8 +1,9 @@
+import { onLinkClick } from '../lib/router'
 import { company, nav, team } from '../content'
 import { SocialLinks } from './Social'
 import { Logo } from './ui'
 
-export function Footer() {
+export function Footer({ home = true }: { home?: boolean }) {
   return (
     <footer className="relative z-10 overflow-hidden bg-paper-2 text-navy">
       <div className="wrap pt-16">
@@ -28,7 +29,7 @@ export function Footer() {
         </ul>
         <nav aria-label="Sidefod" className="mt-8 border-t border-line pt-4">
           <ul className="flex flex-wrap items-center gap-x-8 gap-y-1">
-            {nav.map((n) => <li key={n.href}><a className="t-mono link inline-flex min-h-11 items-center" href={n.href}>{n.label}</a></li>)}
+            {nav.map((n) => <li key={n.href}><a className="t-mono link inline-flex min-h-11 items-center" href={home ? n.href : `/${n.href}`} onClick={(e) => { if (!home) onLinkClick(e, `/${n.href}`) }}>{n.label}</a></li>)}
             <li className="t-mono text-ink-muted sm:ml-auto">© 2026</li>
           </ul>
         </nav>
